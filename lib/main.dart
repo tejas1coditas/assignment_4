@@ -1,3 +1,4 @@
+import 'package:assignment_4/constants/constants.dart';
 import 'package:assignment_4/notes_provider/notes_provider.dart';
 import 'package:assignment_4/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (context) => NotesProvider())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: Color(0xFF252525)),
+        theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
         home: HomeScreen(),
       ),
     );
