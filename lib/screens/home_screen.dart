@@ -72,73 +72,71 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   )
-                : SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(24.0, 40.0, 25, 20),
-                      child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          final note = noteprovider.getNotes()[index];
-                          final isSelectedForDeletion =
-                              noteprovider.noteSelectedForDeletion == note;
+                : Padding(
+                    padding: const EdgeInsets.fromLTRB(24.0, 40.0, 25, 20),
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        final note = noteprovider.getNotes()[index];
+                        final isSelectedForDeletion =
+                            noteprovider.noteSelectedForDeletion == note;
 
-                          return ListTile(
-                            onTap: () {
-                              if (isSelectedForDeletion) {
-                                noteprovider.clearDeletionSelection();
-                              } else if (noteprovider.noteSelectedForDeletion !=
-                                  null) {
-                                noteprovider.clearDeletionSelection();
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        NoteDetailScreen(note: note),
+                        return ListTile(
+                          onTap: () {
+                            if (isSelectedForDeletion) {
+                              noteprovider.clearDeletionSelection();
+                            } else if (noteprovider.noteSelectedForDeletion !=
+                                null) {
+                              noteprovider.clearDeletionSelection();
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      NoteDetailScreen(note: note),
+                                ),
+                              );
+                            }
+                          },
+                          onLongPress: () {
+                            noteprovider.selectNoteForDeletion(note);
+                          },
+                          title: isSelectedForDeletion
+                              ? Center(
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: whiteColor,
+                                      size: 35,
+                                    ),
+                                    onPressed: () {
+                                      noteprovider.deleteNote(note);
+                                    },
                                   ),
-                                );
-                              }
-                            },
-                            onLongPress: () {
-                              noteprovider.selectNoteForDeletion(note);
-                            },
-                            title: isSelectedForDeletion
-                                ? Center(
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: whiteColor,
-                                        size: 35,
-                                      ),
-                                      onPressed: () {
-                                        noteprovider.deleteNote(note);
-                                      },
-                                    ),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 17,
-                                    ),
-                                    child: Text(
-                                      note.title,
-                                      style: TextStyle(
-                                        color: backgroundColor,
-                                        fontSize: 25,
-                                      ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 17,
+                                  ),
+                                  child: Text(
+                                    note.title,
+                                    style: TextStyle(
+                                      color: backgroundColor,
+                                      fontSize: 25,
                                     ),
                                   ),
+                                ),
 
-                            tileColor: isSelectedForDeletion
-                                ? Colors.red
-                                : noteprovider.getColor(),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, child) =>
-                            SizedBox(height: 20),
-                        itemCount: noteprovider.getLength(),
-                      ),
+                          tileColor: isSelectedForDeletion
+                              ? Colors.red
+                              : noteprovider.getColor(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, child) =>
+                          SizedBox(height: 20),
+                      itemCount: noteprovider.getLength(),
                     ),
                   ),
           );
