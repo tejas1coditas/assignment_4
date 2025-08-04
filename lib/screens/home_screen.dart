@@ -88,11 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 null) {
                               noteprovider.clearDeletionSelection();
                             } else {
+                              final noteIndex = noteprovider.notes.indexOf(
+                                note,
+                              );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      NoteDetailScreen(note: note),
+                                      NoteDetailScreen(noteIndex: noteIndex),
                                 ),
                               );
                             }

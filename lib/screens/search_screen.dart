@@ -40,7 +40,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 hintText: 'Search by the keyword...',
                 hintStyle: const TextStyle(color: Colors.grey),
                 border: InputBorder.none,
-
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
                         icon: Icon(Icons.clear, color: whiteColor),
@@ -52,16 +51,22 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
           ),
-
           body: Consumer<NotesProvider>(
             builder: (context, notesProvider, child) {
               final query = _searchController.text.toLowerCase();
 
               if (query.isEmpty) {
-                return const Center(
-                  child: Text(
-                    'Search for notes by title.',
-                    style: TextStyle(color: Colors.grey),
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(searchScreenImage, height: 150),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Search for notes by title.',
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                      ),
+                    ],
                   ),
                 );
               }
@@ -93,10 +98,16 @@ class _SearchScreenState extends State<SearchScreen> {
                     final note = filteredNotes[index];
                     return ListTile(
                       onTap: () {
+                        // Find the index of the note in the original list
+                        final originalIndex = notesProvider.notes.indexOf(note);
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EditNoteScreen(notes: note),
+                            builder: (context) => EditNoteScreen(
+                              notes: note,
+                              noteIndex: originalIndex, 
+                            ),
                           ),
                         );
                       },

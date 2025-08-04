@@ -29,10 +29,12 @@ class NotesProvider extends ChangeNotifier {
     return notes.length;
   }
 
-  void updateTask(NotesModel oldNotes, NotesModel newNotes) {
-    final index = notes.indexOf(oldNotes);
-    notes[index] = newNotes;
-    notifyListeners();
+ 
+  void updateTask(int index, NotesModel newNotes) {
+    if (index >= 0 && index < notes.length) {
+      notes[index] = newNotes;
+      notifyListeners();
+    }
   }
 
   Color getColor() {

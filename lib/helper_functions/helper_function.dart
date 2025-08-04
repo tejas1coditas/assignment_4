@@ -8,7 +8,7 @@ void saveNote({
   required BuildContext context,
   required TextEditingController titleController,
   required TextEditingController descriptionController,
-  required NotesModel originalNote,
+  required int noteIndex,
 }) {
   final title = titleController.text;
   final description = descriptionController.text;
@@ -19,7 +19,7 @@ void saveNote({
     Provider.of<NotesProvider>(
       context,
       listen: false,
-    ).updateTask(originalNote, updatedNote);
+    ).updateTask(noteIndex, updatedNote);
 
     Navigator.pop(context);
   }
@@ -29,7 +29,7 @@ void showSaveConfirmationDialog({
   required BuildContext context,
   required TextEditingController titleController,
   required TextEditingController descriptionController,
-  required NotesModel originalNote,
+  required int noteIndex,
 }) {
   showDialog(
     context: context,
@@ -38,9 +38,9 @@ void showSaveConfirmationDialog({
         backgroundColor: backgroundColor,
         title: const Icon(Icons.info, color: Color(0XFF606060)),
         content: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 10, 0, 0),
+          padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
           child: const Text(
-            'Are you sure you want to discard your changes ?',
+            'Are you sure you want to discrad your changes?',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -53,14 +53,14 @@ void showSaveConfirmationDialog({
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 0, 10),
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
                 child: SizedBox(
-                  width: 104,
+                  width: 100,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadiusGeometry.circular(5),
                       ),
                     ),
                     child: const Text(
@@ -77,20 +77,20 @@ void showSaveConfirmationDialog({
                   ),
                 ),
               ),
-              const SizedBox(width: 30),
+              const SizedBox(width: 15),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                padding: const EdgeInsets.fromLTRB(15, 0, 0, 8),
                 child: SizedBox(
                   width: 100,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadiusGeometry.circular(5),
                       ),
                     ),
                     child: const Text(
-                      'Keep',
+                      'Save',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -104,7 +104,7 @@ void showSaveConfirmationDialog({
                         context: context,
                         titleController: titleController,
                         descriptionController: descriptionController,
-                        originalNote: originalNote,
+                        noteIndex: noteIndex,
                       );
                     },
                   ),
