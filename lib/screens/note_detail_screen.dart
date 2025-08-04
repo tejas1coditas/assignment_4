@@ -1,5 +1,5 @@
 import 'package:assignment_4/constants/constants.dart';
-import 'package:assignment_4/models/notes_model.dart';
+
 import 'package:assignment_4/notes_provider/notes_provider.dart';
 import 'package:assignment_4/screens/edit_note_screen.dart';
 import 'package:flutter/material.dart';
