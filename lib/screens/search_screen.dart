@@ -98,7 +98,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     final note = filteredNotes[index];
                     return ListTile(
                       onTap: () {
-                        // Find the index of the note in the original list
                         final originalIndex = notesProvider.notes.indexOf(note);
 
                         Navigator.push(
@@ -106,7 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           MaterialPageRoute(
                             builder: (context) => EditNoteScreen(
                               notes: note,
-                              noteIndex: originalIndex, 
+                              noteIndex: originalIndex,
                             ),
                           ),
                         );
